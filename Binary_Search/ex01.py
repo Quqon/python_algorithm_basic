@@ -17,11 +17,11 @@ budget = [120, 130, 140, 40, 100]
 N = 5
 total = 450
 
-def solution(N, budget, total):
+def solution1(N, budget, total):
     sum = 0
     num = 0
     sortSum = 0
-    #숫자 배열에서 두번째 큰값 찾기
+    # 숫자 배열에서 두번째 큰값 찾기
     # second = largest = -float('inf')
     # for n in range(budget):
     #     if n > largest:
@@ -31,7 +31,7 @@ def solution(N, budget, total):
     #         second = n
     # print(second)
     
-    #숫자 배열에서 메소드를 이용해 두번째 큰값 찾기
+    # 숫자 배열에서 메소드를 이용해 두번째 큰값 찾기
     sortNum = sorted(set(budget), reverse = True)
     second = sortNum[1]
 
@@ -52,7 +52,39 @@ def solution(N, budget, total):
 
         print(newNum1, newNum2)
 
-        #총 합은 총 예산 보다 작을 수 있는 최댓값으로 잘 나오지만, 가장 많이 지급할 수 있는 예산의 값이 원하는 대로 나오지 않는다.
+        # 총 합은 총 예산 보다 작을 수 있는 최댓값으로 잘 나오지만, 가장 많이 지급할 수 있는 예산의 값이 원하는 대로 나오지 않는다.
 
 
-solution(N, budget, total)
+solution1(N, budget, total)
+
+# 이분탐색방법 듣고 풀이
+def solution2(N, budget, total):
+    largest = max(budget)
+    sum = 0
+
+    def get_limit(value):
+        limit = (value + largest) / 2
+        return limit
+
+    # 상한 액은 0 ~ largest
+    for i in range(len(budget)):
+        sum += budget[i]
+        if get_limit(0) < budget[i]:
+            sum += get_limit(0)
+    
+    result = largest - sum
+    
+    while True:
+        if result == False:
+            return get_limit(0)
+        elif result > 0:
+            limit = get_limit(0)
+            sum = 0
+            for i in range(len(budget)):
+                sum += budget[i]
+                if get_limit(limit) < budget[i]:
+                    sum += get_limit(limit)
+        elif result < 0:
+            break
+
+        # 계속 반복되어 풀리지 않는다.
