@@ -12,3 +12,4 @@ for _ in range(n):
         break
 else:
     print('\n난수 생성을 종료합니다.')                   # for문 종료 후 else문 실행, 그 후 프로그램 종료.
+
