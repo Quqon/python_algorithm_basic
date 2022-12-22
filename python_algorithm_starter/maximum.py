@@ -7,7 +7,7 @@ def max_of(a: Sequence) -> Any:
     for i in range(1, len(a)):
         if a[i] > maximum:
             maximum = a[i];
-        return maximum;
+    return maximum;
 
 
 if __name__ == '__main__':
